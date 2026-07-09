@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Notice {
+  id          Int      @id @default(autoincrement())
+  title       String
+  createdAt   DateTime @default(now())
+  body        String
+  category    Category
+  image       String?
+  priority    Priority @default(NORMAL)
+  publishDate DateTime
+  updatedAt   DateTime @updatedAt
+}
+
+enum Category {
+  EXAM
+  EVENT
+  GENERAL
+}
+
+enum Priority {
+  NORMAL
+  URGENT
+}
